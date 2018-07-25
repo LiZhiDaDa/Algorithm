@@ -6,6 +6,7 @@ import java.util.LinkedList;
 //这里的算法都是根据LeetCode题目写的，大家可以根据每个方法的注释去LeetCode寻找具体的题目解释。
 //可以在LeetCode中搜索编号或者题目
 
+
 public class Algorithm {
 	public static void main(String[] args) {
 		Solution solution = new Solution();
