@@ -21,16 +21,33 @@ public class Algorithm {
 		// int result = solution.removeElement(nums, 3);
 		// int result = solution.strStr("a", "a");
 		// String result = solution.countAndSay(6);
-		int result = solution.maxSubArray(nums);
+		// int result = solution.maxSubArray(nums);
+		int result = solution.lengthOfLastWord("hello world");
 		System.out.println(result);
 	}
 }
 
 class Solution {
 	// 58、最后一个单词的长度
+	// 最优算法是java自带的一个方法，return s.trim().length()-s.trim().lastIndexOf(" ")-1;  trim只是去掉前后空格
+	// 其次的算法是根据空格为分隔符分成数组求最后一个元素的length
 	public int lengthOfLastWord(String s) {
-		
-		return 1;
+		if(s.trim().length() == 0) {
+			return 0;
+		}
+		int len = 0;
+		for(int i=s.length()-1; i>=0; i--) {
+			char c = s.charAt(i);
+			System.out.println(String.valueOf(c));
+			if(String.valueOf(c).equals(" ")) {
+				if(len > 0) {
+					break;
+				}
+			}else {
+				len++;
+			}
+		}
+		return len;
 	}
 	
 	// 53、最大子序和
