@@ -1,11 +1,13 @@
 package com.tfq;
 
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
 //这里的算法都是根据LeetCode题目写的，大家可以根据每个方法的注释去LeetCode寻找具体的题目解释。
 //可以在LeetCode中搜索编号或者题目
-
 
 public class Algorithm {
 	public static void main(String[] args) {
@@ -16,40 +18,72 @@ public class Algorithm {
 		// String[] strs = { "aa", "a" };
 		// String result = solution.longestCommonPrefix(strs);
 		// boolean result = solution.isValid("([)]");
-		int[] nums = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
+		// int[] nums = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
 		// int result = solution.removeDuplicates(nums);
 		// int result = solution.removeElement(nums, 3);
 		// int result = solution.strStr("a", "a");
 		// String result = solution.countAndSay(6);
 		// int result = solution.maxSubArray(nums);
-		int result = solution.lengthOfLastWord("hello world");
-		System.out.println(result);
+		// int result = solution.lengthOfLastWord("hello world");
+		int[] nums = {9,8,7,6,5,4,3,2,1,0};
+		int[] result = solution.plusOne(nums);
+		int i=0;
+		while(i<result.length) {
+			System.out.println(result[i]);
+			i++;
+		}
+//		System.out.println(result);
 	}
 }
 
 class Solution {
+
+	// 66、加一
+	public int[] plusOne(int[] digits) {
+		int num = 0;
+		for (int i = digits.length - 1; i >= 0; i--) {
+			num += digits[i] * Math.pow(10, digits.length - 1 - i);
+		}
+		int tmp = num;
+		num += 1;
+		int len = digits.length;
+		//判断新数组是否进位了
+		if(String.valueOf(num).length() > String.valueOf(tmp).length()) {
+			len ++;
+		}
+		int[] list = new int[len];
+		int i = 0;
+		while (num >= 1) {
+			list[len-1-i] = num%10;
+			num = num / 10;
+			i++;
+		}
+		return list;
+	}
+
 	// 58、最后一个单词的长度
-	// 最优算法是java自带的一个方法，return s.trim().length()-s.trim().lastIndexOf(" ")-1;  trim只是去掉前后空格
+	// 最优算法是java自带的一个方法，return s.trim().length()-s.trim().lastIndexOf(" ")-1;
+	// trim只是去掉前后空格
 	// 其次的算法是根据空格为分隔符分成数组求最后一个元素的length
 	public int lengthOfLastWord(String s) {
-		if(s.trim().length() == 0) {
+		if (s.trim().length() == 0) {
 			return 0;
 		}
 		int len = 0;
-		for(int i=s.length()-1; i>=0; i--) {
+		for (int i = s.length() - 1; i >= 0; i--) {
 			char c = s.charAt(i);
 			System.out.println(String.valueOf(c));
-			if(String.valueOf(c).equals(" ")) {
-				if(len > 0) {
+			if (String.valueOf(c).equals(" ")) {
+				if (len > 0) {
 					break;
 				}
-			}else {
+			} else {
 				len++;
 			}
 		}
 		return len;
 	}
-	
+
 	// 53、最大子序和
 	public int maxSubArray(int[] nums) {
 		// 第一种方法时间复杂度为 O(n^2)
@@ -69,12 +103,12 @@ class Solution {
 		// 第二种方法时间复杂度为 O(n)
 		int max = nums[0];
 		int sum = 0;
-		for(int i=0; i<nums.length; i++) {
+		for (int i = 0; i < nums.length; i++) {
 			sum += nums[i];
-			if(max < sum) {
+			if (max < sum) {
 				max = sum;
 			}
-			if(sum < 0) {
+			if (sum < 0) {
 				sum = 0;
 			}
 		}
