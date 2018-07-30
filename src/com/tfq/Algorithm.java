@@ -27,6 +27,12 @@ public class Algorithm {
 }
 
 class Solution {
+	// 58、最后一个单词的长度
+	public int lengthOfLastWord(String s) {
+		
+		return 1;
+	}
+	
 	// 53、最大子序和
 	public int maxSubArray(int[] nums) {
 		// 第一种方法时间复杂度为 O(n^2)
