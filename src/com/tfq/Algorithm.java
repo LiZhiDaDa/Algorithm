@@ -35,6 +35,13 @@ public class Algorithm {
 }
 
 class Solution {
+	
+	// 69、x的平方根
+	public int mySqrt(int x) {
+		
+        return 2;
+    }
+	
 	// 67、二进制求和
 	public String addBinary(String a, String b) {
 		int[] A = toIntArray(a);
@@ -181,7 +188,6 @@ class Solution {
 		}
 		return result;
 	}
-
 	public String nextNum(String str) {
 		String say = "";
 		char[] c = str.toCharArray();
