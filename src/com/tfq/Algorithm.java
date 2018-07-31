@@ -39,8 +39,21 @@ public class Algorithm {
 class Solution {
 	// 67、二进制求和
 	public String addBinary(String a, String b) {
-
+		int[] A = toIntArray(a);
+		int[] B = toIntArray(b);
+		int carry = 0;
+		
+		return "";
     }
+	public int[] toIntArray(String a) {
+		char[] A = a.toCharArray(); 
+		int[] arrayA = new int[A.length];
+		for(int i=0; i<A.length; i++) {
+			arrayA[i] = Integer.parseInt(String.valueOf(A[i]));
+		}
+		return arrayA;
+	}
+	
 	// 66、加一 
 	public int[] plusOne(int[] digits) {
 		int i = digits.length - 1;
