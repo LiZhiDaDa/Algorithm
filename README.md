@@ -20,3 +20,5 @@
 - 38、报数  ```countAndSay```
 - 53、最大子序和  ```maxSubArray```
 - 58、最后一个单词的长度  ```lengthOfLastWord```
+- 66、加一   ```plusOne```
+- 67、二进制求和  ```addBinary```

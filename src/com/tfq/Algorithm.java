@@ -37,8 +37,11 @@ public class Algorithm {
 }
 
 class Solution {
+	// 67、二进制求和
+	public String addBinary(String a, String b) {
 
-	// 66、加一 error
+    }
+	// 66、加一 
 	public int[] plusOne(int[] digits) {
 		int i = digits.length - 1;
 		int carry = 1;
