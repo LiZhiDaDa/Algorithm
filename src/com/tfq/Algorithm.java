@@ -25,40 +25,42 @@ public class Algorithm {
 		// String result = solution.countAndSay(6);
 		// int result = solution.maxSubArray(nums);
 		// int result = solution.lengthOfLastWord("hello world");
-		int[] nums = {9,8,7,6,5,4,3,2,1,0};
+		int[] nums = {  9 };
 		int[] result = solution.plusOne(nums);
-		int i=0;
-		while(i<result.length) {
+		int i = 0;
+		while (i < result.length) {
 			System.out.println(result[i]);
 			i++;
 		}
-//		System.out.println(result);
+		// System.out.println(result);
 	}
 }
 
 class Solution {
 
-	// 66、加一
+	// 66、加一 error
 	public int[] plusOne(int[] digits) {
-		int num = 0;
-		for (int i = digits.length - 1; i >= 0; i--) {
-			num += digits[i] * Math.pow(10, digits.length - 1 - i);
+		int i = digits.length - 1;
+		int carry = 1;
+		while (i >= 0) {
+			int num = digits[i] + carry;
+			digits[i] = num % 10;
+			carry = num / 10;
+			i--;
 		}
-		int tmp = num;
-		num += 1;
-		int len = digits.length;
-		//判断新数组是否进位了
-		if(String.valueOf(num).length() > String.valueOf(tmp).length()) {
-			len ++;
+		if (carry > 0) {
+			int[] array = new int[digits.length + 1];
+			for(int j=0; j<array.length; j++) {
+				if(j == array.length-1) {
+					array[0] = carry;
+					break;
+				}
+				array[j+1] = digits[j];
+			}
+			return array;
+		} else {
+			return digits;
 		}
-		int[] list = new int[len];
-		int i = 0;
-		while (num >= 1) {
-			list[len-1-i] = num%10;
-			num = num / 10;
-			i++;
-		}
-		return list;
 	}
 
 	// 58、最后一个单词的长度
