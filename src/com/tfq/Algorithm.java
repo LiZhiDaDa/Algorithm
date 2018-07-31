@@ -29,7 +29,8 @@ public class Algorithm {
 		// System.out.println(result[i]);
 		// i++;
 		// }
-		String result = solution.addBinary("11", "1");
+//		String result = solution.addBinary("11", "1");
+		int result = solution.mySqrt(3);
 		System.out.println(result);
 	}
 }
@@ -38,8 +39,23 @@ class Solution {
 	
 	// 69、x的平方根
 	public int mySqrt(int x) {
-		
-        return 2;
+		if(x==0) {return 0;}
+		if(x==1) {return 1;}
+		int begin = 0;
+		int end = x;
+		int mid = x/2;
+		while(begin <= end) {
+			mid = (begin+end)/2;
+			if(mid == x/mid) {
+				return mid;
+			}
+			if(mid < x/mid) {
+				begin = mid+1;
+			}else {
+				end = mid-1;
+			}
+		}
+        return end;
     }
 	
 	// 67、二进制求和
