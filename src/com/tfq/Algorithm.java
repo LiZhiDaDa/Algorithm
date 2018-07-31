@@ -1,10 +1,7 @@
 package com.tfq;
 
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
-
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 //这里的算法都是根据LeetCode题目写的，大家可以根据每个方法的注释去LeetCode寻找具体的题目解释。
 //可以在LeetCode中搜索编号或者题目
@@ -25,14 +22,15 @@ public class Algorithm {
 		// String result = solution.countAndSay(6);
 		// int result = solution.maxSubArray(nums);
 		// int result = solution.lengthOfLastWord("hello world");
-		int[] nums = {  9 };
-		int[] result = solution.plusOne(nums);
-		int i = 0;
-		while (i < result.length) {
-			System.out.println(result[i]);
-			i++;
-		}
-		// System.out.println(result);
+		// int[] nums = { 9 };
+		// int[] result = solution.plusOne(nums);
+		// int i = 0;
+		// while (i < result.length) {
+		// System.out.println(result[i]);
+		// i++;
+		// }
+		String result = solution.addBinary("11", "1");
+		System.out.println(result);
 	}
 }
 
@@ -42,8 +40,38 @@ class Solution {
 		int[] A = toIntArray(a);
 		int[] B = toIntArray(b);
 		int carry = 0;
-		
-		return "";
+		int len = A.length > B.length ? A.length : B.length;
+		int tmp = len+1;
+		int[] result = new int[len];
+		int i=A.length-1,j=B.length-1;
+		while(i>=0 || j>=0) {
+			int num = 0;
+			if(i>=0) {
+				num += A[i];
+			}
+			if(j>=0) {
+				num += B[j];
+			}
+			num += carry;
+			carry = num / 2;
+			len--;
+			result[len] = num % 2;
+			i--;
+			j--;
+		}
+		if(carry > 0) {
+			int[] tmpArray = new int[tmp];
+			for(int k=0; k<tmp; k++) {
+				if(k==0) {
+					tmpArray[0] = carry;
+				}else {
+					tmpArray[k] = result[k-1];
+				}
+			}
+			return arrayToString(tmpArray);
+		}else {
+			return arrayToString(result);
+		}
     }
 	public int[] toIntArray(String a) {
 		char[] A = a.toCharArray(); 
@@ -52,6 +80,13 @@ class Solution {
 			arrayA[i] = Integer.parseInt(String.valueOf(A[i]));
 		}
 		return arrayA;
+	}
+	public String arrayToString(int[] a) {
+		StringBuffer b = new StringBuffer();
+		for(int i=0; i<a.length; i++) {
+			b.append(a[i]);
+		}
+		return b.toString();
 	}
 	
 	// 66、加一 
