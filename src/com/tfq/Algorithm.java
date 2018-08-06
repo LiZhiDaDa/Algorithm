@@ -30,13 +30,38 @@ public class Algorithm {
 		// i++;
 		// }
 //		String result = solution.addBinary("11", "1");
-		int result = solution.mySqrt(3);
+//		int result = solution.mySqrt(3);
+		int result = solution.climbStairs(9);
 		System.out.println(result);
 	}
 }
 
 class Solution {
 	
+	// 70、爬楼梯
+	//可以参考斐波那契数列，
+	public int climbStairs(int n) {
+		//最优解法
+		int[] dp = new int[n + 3]; // 为了避免下面给数组赋值时 若n<3 就容易出现数组越界 所以在这里多申请了3个空间来赋值dp初始条件
+		dp[0] = 0;
+		dp[1] = 1;
+		dp[2] = 2; //
+		for (int i = 3; i <= n; i++) {
+			dp[i] = dp[i - 1] + dp[i - 2];
+
+		}
+		return dp[n];
+		// 此方法超时
+		// int m = 0;
+		// if(n == 2) {
+		// m = 2;
+		// }else if(n == 1) {
+		// m = 1;
+		// }else {
+		// m = climbStairs(n-2)+climbStairs(n-1);
+		// }
+		// return m;
+	}
 	// 69、x的平方根
 	public int mySqrt(int x) {
 		if(x==0) {return 0;}
