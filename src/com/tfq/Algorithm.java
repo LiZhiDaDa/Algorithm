@@ -39,17 +39,28 @@ public class Algorithm {
 }
 
 class Solution {
+	没有做完。
 	// 107、二叉树的层次遍历
 	public List<List<Integer>> levelOrderBottom(TreeNode root) {
-//		int[] a = 
+		List<TreeNode> list = new ArrayList<TreeNode>();
+		list.add(root);
+		a(list);
 		return null;
 	}
-	public List<Integer> a(List<Integer> trees){
-		List<Integer> list = new ArrayList<Integer>();
+	public List<List<TreeNode>> a(List<TreeNode> trees){
+		List<List<TreeNode>> list1 = new ArrayList<List<TreeNode>>();
+		List<TreeNode> list = new ArrayList<TreeNode>();
 		for(int i=0; i<trees.size(); i++) {
-			
+			TreeNode tree = trees.get(i);
+			if(tree.left != null) {
+				list.add(tree.left);
+			}
+			if(tree.right != null) {
+				list.add(tree.right);
+			}
 		}
-		return null;
+		list1.add(list);
+		return list1;
 	}
 
 	// 104、二叉树的最大深度
