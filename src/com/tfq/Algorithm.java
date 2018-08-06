@@ -1,9 +1,9 @@
 package com.tfq;
 
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
-
-import apple.laf.JRSUIUtils.Tree;
+import java.util.List;
 
 //这里的算法都是根据LeetCode题目写的，大家可以根据每个方法的注释去LeetCode寻找具体的题目解释。
 //可以在LeetCode中搜索编号或者题目
@@ -39,45 +39,65 @@ public class Algorithm {
 }
 
 class Solution {
+	// 107、二叉树的层次遍历
+	public List<List<Integer>> levelOrderBottom(TreeNode root) {
+//		int[] a = 
+		return null;
+	}
+	public List<Integer> a(List<Integer> trees){
+		List<Integer> list = new ArrayList<Integer>();
+		for(int i=0; i<trees.size(); i++) {
+			
+		}
+		return null;
+	}
+
 	// 104、二叉树的最大深度
 	public int maxDepth(TreeNode root) {
-		if(root == null) {
+		if (root == null) {
 			return 0;
 		}
-		if(root.left == null) {
-			return maxDepth(root.right)+1;
+		if (root.left == null) {
+			return maxDepth(root.right) + 1;
 		}
-		if(root.right == null) {
-			return maxDepth(root.left)+1;
+		if (root.right == null) {
+			return maxDepth(root.left) + 1;
 		}
-		
-		return 1;
+		return max(maxDepth(root.left), maxDepth(root.right)) + 1;
 	}
+
+	public int max(int a, int b) {
+		if (a > b) {
+			return a;
+		}
+		return b;
+	}
+
 	// 100、相同的树
 	public boolean isSameTree(TreeNode p, TreeNode q) {
-        if(p==null && q==null) {
-        	return true;
-        }
-        if(p==null || q==null) {
-        	return false;
-        }
-        if(p.val != q.val) {
-        	return false;
-        }
+		if (p == null && q == null) {
+			return true;
+		}
+		if (p == null || q == null) {
+			return false;
+		}
+		if (p.val != q.val) {
+			return false;
+		}
 		return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
-    }
-	
+	}
+
 	// 101、对称二叉树
 	public boolean isSymmetric(TreeNode root) {
-		//这里多了一步操作，省了非空判断
+		// 这里多了一步操作，省了非空判断
 		return symmetric(root, root);
 	}
 
 	public boolean symmetric(TreeNode left, TreeNode right) {
-		if(left == null && right == null) {
+		if (left == null && right == null) {
 			return true;
 		}
-		if(left == null || right == null) {
+		if (left == null || right == null) {
 			return false;
 		}
 		if (left.val != right.val) {

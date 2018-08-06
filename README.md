@@ -23,3 +23,8 @@
 - 66、加一   ```plusOne```
 - 67、二进制求和  ```addBinary```
 - 69、x的平方根  ```mySqrt```
+- 70、爬楼梯  ```climbStairs```
+- 101、对称二叉树  ```isSymmetric```
+- 100、相同的树  ```isSameTree```
+- 104、二叉树的最大深度  ```maxDepth```
+- 107、二叉树的层次遍历  ```levelOrderBottom```
