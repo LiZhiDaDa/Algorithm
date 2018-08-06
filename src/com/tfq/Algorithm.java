@@ -3,6 +3,8 @@ package com.tfq;
 import java.util.Deque;
 import java.util.LinkedList;
 
+import apple.laf.JRSUIUtils.Tree;
+
 //这里的算法都是根据LeetCode题目写的，大家可以根据每个方法的注释去LeetCode寻找具体的题目解释。
 //可以在LeetCode中搜索编号或者题目
 
@@ -29,19 +31,49 @@ public class Algorithm {
 		// System.out.println(result[i]);
 		// i++;
 		// }
-//		String result = solution.addBinary("11", "1");
-//		int result = solution.mySqrt(3);
-		int result = solution.climbStairs(9);
+		// String result = solution.addBinary("11", "1");
+		// int result = solution.mySqrt(3);
+		int result = solution.climbStairs(44);
 		System.out.println(result);
 	}
 }
 
 class Solution {
-	
+
+	// 101、对称二叉树
+	public boolean isSymmetric(TreeNode root) {
+		//这里多了一步操作，省了非空判断
+		return symmetric(root, root);
+	}
+
+	public boolean symmetric(TreeNode left, TreeNode right) {
+		if(left == null && right == null) {
+			return true;
+		}
+		if(left == null || right == null) {
+			return false;
+		}
+		if (left.val != right.val) {
+			return false;
+		} else {
+			return symmetric(left.left, right.right) && symmetric(left.right, right.left);
+		}
+	}
+
+	public class TreeNode {
+		int val;
+		TreeNode left;
+		TreeNode right;
+
+		TreeNode(int x) {
+			val = x;
+		}
+	}
+
 	// 70、爬楼梯
-	//可以参考斐波那契数列，
+	// 可以参考斐波那契数列，
 	public int climbStairs(int n) {
-		//最优解法
+		// 最优解法
 		int[] dp = new int[n + 3]; // 为了避免下面给数组赋值时 若n<3 就容易出现数组越界 所以在这里多申请了3个空间来赋值dp初始条件
 		dp[0] = 0;
 		dp[1] = 1;
@@ -62,42 +94,47 @@ class Solution {
 		// }
 		// return m;
 	}
+
 	// 69、x的平方根
 	public int mySqrt(int x) {
-		if(x==0) {return 0;}
-		if(x==1) {return 1;}
+		if (x == 0) {
+			return 0;
+		}
+		if (x == 1) {
+			return 1;
+		}
 		int begin = 0;
 		int end = x;
-		int mid = x/2;
-		while(begin <= end) {
-			mid = (begin+end)/2;
-			if(mid == x/mid) {
+		int mid = x / 2;
+		while (begin <= end) {
+			mid = (begin + end) / 2;
+			if (mid == x / mid) {
 				return mid;
 			}
-			if(mid < x/mid) {
-				begin = mid+1;
-			}else {
-				end = mid-1;
+			if (mid < x / mid) {
+				begin = mid + 1;
+			} else {
+				end = mid - 1;
 			}
 		}
-        return end;
-    }
-	
+		return end;
+	}
+
 	// 67、二进制求和
 	public String addBinary(String a, String b) {
 		int[] A = toIntArray(a);
 		int[] B = toIntArray(b);
 		int carry = 0;
 		int len = A.length > B.length ? A.length : B.length;
-		int tmp = len+1;
+		int tmp = len + 1;
 		int[] result = new int[len];
-		int i=A.length-1,j=B.length-1;
-		while(i>=0 || j>=0) {
+		int i = A.length - 1, j = B.length - 1;
+		while (i >= 0 || j >= 0) {
 			int num = 0;
-			if(i>=0) {
+			if (i >= 0) {
 				num += A[i];
 			}
-			if(j>=0) {
+			if (j >= 0) {
 				num += B[j];
 			}
 			num += carry;
@@ -107,37 +144,39 @@ class Solution {
 			i--;
 			j--;
 		}
-		if(carry > 0) {
+		if (carry > 0) {
 			int[] tmpArray = new int[tmp];
-			for(int k=0; k<tmp; k++) {
-				if(k==0) {
+			for (int k = 0; k < tmp; k++) {
+				if (k == 0) {
 					tmpArray[0] = carry;
-				}else {
-					tmpArray[k] = result[k-1];
+				} else {
+					tmpArray[k] = result[k - 1];
 				}
 			}
 			return arrayToString(tmpArray);
-		}else {
+		} else {
 			return arrayToString(result);
 		}
-    }
+	}
+
 	public int[] toIntArray(String a) {
-		char[] A = a.toCharArray(); 
+		char[] A = a.toCharArray();
 		int[] arrayA = new int[A.length];
-		for(int i=0; i<A.length; i++) {
+		for (int i = 0; i < A.length; i++) {
 			arrayA[i] = Integer.parseInt(String.valueOf(A[i]));
 		}
 		return arrayA;
 	}
+
 	public String arrayToString(int[] a) {
 		StringBuffer b = new StringBuffer();
-		for(int i=0; i<a.length; i++) {
+		for (int i = 0; i < a.length; i++) {
 			b.append(a[i]);
 		}
 		return b.toString();
 	}
-	
-	// 66、加一 
+
+	// 66、加一
 	public int[] plusOne(int[] digits) {
 		int i = digits.length - 1;
 		int carry = 1;
@@ -149,12 +188,12 @@ class Solution {
 		}
 		if (carry > 0) {
 			int[] array = new int[digits.length + 1];
-			for(int j=0; j<array.length; j++) {
-				if(j == array.length-1) {
+			for (int j = 0; j < array.length; j++) {
+				if (j == array.length - 1) {
 					array[0] = carry;
 					break;
 				}
-				array[j+1] = digits[j];
+				array[j + 1] = digits[j];
 			}
 			return array;
 		} else {
@@ -229,6 +268,7 @@ class Solution {
 		}
 		return result;
 	}
+
 	public String nextNum(String str) {
 		String say = "";
 		char[] c = str.toCharArray();
