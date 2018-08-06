@@ -39,7 +39,34 @@ public class Algorithm {
 }
 
 class Solution {
-
+	// 104、二叉树的最大深度
+	public int maxDepth(TreeNode root) {
+		if(root == null) {
+			return 0;
+		}
+		if(root.left == null) {
+			return maxDepth(root.right)+1;
+		}
+		if(root.right == null) {
+			return maxDepth(root.left)+1;
+		}
+		
+		return 1;
+	}
+	// 100、相同的树
+	public boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p==null && q==null) {
+        	return true;
+        }
+        if(p==null || q==null) {
+        	return false;
+        }
+        if(p.val != q.val) {
+        	return false;
+        }
+		return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    }
+	
 	// 101、对称二叉树
 	public boolean isSymmetric(TreeNode root) {
 		//这里多了一步操作，省了非空判断
