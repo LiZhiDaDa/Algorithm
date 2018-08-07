@@ -1,6 +1,7 @@
 package com.tfq;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,34 +34,73 @@ public class Algorithm {
 		// }
 		// String result = solution.addBinary("11", "1");
 		// int result = solution.mySqrt(3);
-		int result = solution.climbStairs(44);
+		// int result = solution.climbStairs(44);
+		List<List<Integer>> result = solution.levelOrderBottom(null);
 		System.out.println(result);
 	}
 }
 
 class Solution {
-	没有做完。
 	// 107、二叉树的层次遍历
+	List<List<TreeNode>> listSum = new ArrayList<List<TreeNode>>();
 	public List<List<Integer>> levelOrderBottom(TreeNode root) {
+//		TreeNode root = new TreeNode(1);
+//		TreeNode n9 = new TreeNode(9);
+//		TreeNode n20 = new TreeNode(20);
+//		TreeNode n15 = new TreeNode(15);
+//		TreeNode n7 = new TreeNode(7);
+//		root.left = n9;
+//		root.right = n20;
+//		n20.left = n15;
+//		n20.right = n7;
+		if(root == null) {
+			return new ArrayList<>();
+		}
+		
 		List<TreeNode> list = new ArrayList<TreeNode>();
 		list.add(root);
-		a(list);
-		return null;
-	}
-	public List<List<TreeNode>> a(List<TreeNode> trees){
-		List<List<TreeNode>> list1 = new ArrayList<List<TreeNode>>();
-		List<TreeNode> list = new ArrayList<TreeNode>();
-		for(int i=0; i<trees.size(); i++) {
-			TreeNode tree = trees.get(i);
-			if(tree.left != null) {
-				list.add(tree.left);
+		listSum.add(list);
+		List<TreeNode> bList = b(list);
+		if(bList != null) {
+			listSum.add(bList);
+		}
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
+		for(int i=1; i<listSum.size(); i++) {
+			List<TreeNode> model = listSum.get(i);
+			List<Integer> resultIn = new ArrayList<Integer>();
+			for(int j=0; j<model.size(); j++) {
+				TreeNode node = model.get(j);
+				resultIn.add(node.val);
 			}
-			if(tree.right != null) {
-				list.add(tree.right);
+			result.add(resultIn);
+		}
+		List<Integer> first = new ArrayList<Integer>();
+		List<TreeNode> firstModel = listSum.get(0);
+		first.add(firstModel.get(0).val);
+		result.add(first);
+		return result;
+	}
+	
+	public List<TreeNode> b(List<TreeNode> tree) {
+		List<TreeNode> list = new ArrayList<TreeNode>();
+		for(int i=0; i<tree.size(); i++) {
+			TreeNode node = tree.get(i);
+			if(node.left != null) {
+				list.add(node.left);
+			}
+			if(node.right != null) {
+				list.add(node.right);
 			}
 		}
-		list1.add(list);
-		return list1;
+		if(list.size() == 0) {
+			return null;
+		}else {
+			List<TreeNode> bList = b(list);
+			if(bList != null) {
+				listSum.add(bList);
+			}
+		}
+		return list;
 	}
 
 	// 104、二叉树的最大深度
