@@ -1,7 +1,6 @@
 package com.tfq;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,13 +34,62 @@ public class Algorithm {
 		// String result = solution.addBinary("11", "1");
 		// int result = solution.mySqrt(3);
 		// int result = solution.climbStairs(44);
-//		List<List<Integer>> result = solution.levelOrderBottom(null);
-		List<List<Integer>> result = solution.generate(4);
+		// List<List<Integer>> result = solution.levelOrderBottom(null);
+//		List<List<Integer>> result = solution.generate(4);
+//		int[] nums = {3,4,5,6,7,9};
+//		int result = solution.search(nums, 8);
+		boolean result = solution.isPerfectSquare(5);
 		System.out.println(result);
 	}
 }
 
 class Solution {
+	
+	
+	// 367. 有效的完全平方数
+	public boolean isPerfectSquare(int num) {
+		if(num < 1) {
+			return false;
+		}
+		if(num == 1) {
+			return true;
+		}
+		
+		int begin = 0;
+		int end = num/2;
+		float mid = 0.0f;
+		while(begin <= end) {
+			mid = (begin + end)/2;
+			if(mid < num/mid) {
+				begin = (int) (mid+1);
+			}else if(mid > num/mid) {
+				end = (int) (mid-1);
+			}else {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+
+	// 704、二分查找
+	public int search(int[] nums, int target) {
+		int begin = 0;
+		int end = nums.length-1;
+		int mid = 0;
+		while(begin <= end) {
+			mid = (begin+end)/2;
+			if(target < nums[mid]) {
+				end = mid-1;
+			}else if(target > nums[mid]){
+				begin = mid+1;
+			}else {
+				return mid;
+			}
+		}
+		return -1;
+	}
 	
 	// 118、杨辉三角
 	public List<List<Integer>> generate(int numRows) {

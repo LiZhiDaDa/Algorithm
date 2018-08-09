@@ -28,3 +28,5 @@
 - 100、相同的树  ```isSameTree```
 - 104、二叉树的最大深度  ```maxDepth```
 - 107、二叉树的层次遍历  ```levelOrderBottom```
+- 118、杨辉三角  ```generate```
+- 367. 有效的完全平方数  ```isPerfectSquare```
