@@ -38,15 +38,44 @@ public class Algorithm {
 //		List<List<Integer>> result = solution.generate(4);
 //		int[] nums = {3,4,5,6,7,9};
 //		int result = solution.search(nums, 8);
-		boolean result = solution.isPerfectSquare(5);
+//		boolean result = solution.isPerfectSquare(5);
+		int result = solution.arrangeCoins(2146467959);
 		System.out.println(result);
 	}
 }
 
 class Solution {
 	
+	// 441、排列硬币
+	public int arrangeCoins(int n) {
+		//二分法
+		//须知：求和 1+2+3+...+n = n(n+1)/2;
+		int begin = 0;
+		int end = n;
+		int mid = 0;
+		while(begin <= end) {
+			mid = (begin + end)/2;
+			long result = mid*(mid+1L)/2;
+			if(result < n) {
+				begin = mid +1;
+			}else if(result > n) {
+				end = mid - 1;
+			}else if(result == n) {
+				return mid;
+			}
+		}
+		return end;
+		// 此方法效率较低
+		// int i = 1;
+		// int sum = 0;
+		// while(sum<=n) {
+		// sum += i;
+		// i++;
+		// }
+		// return i-2;
+    }
 	
-	// 367. 有效的完全平方数
+	// 367、有效的完全平方数
 	public boolean isPerfectSquare(int num) {
 		if(num < 1) {
 			return false;
