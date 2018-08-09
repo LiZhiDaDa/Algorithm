@@ -35,12 +35,46 @@ public class Algorithm {
 		// String result = solution.addBinary("11", "1");
 		// int result = solution.mySqrt(3);
 		// int result = solution.climbStairs(44);
-		List<List<Integer>> result = solution.levelOrderBottom(null);
+//		List<List<Integer>> result = solution.levelOrderBottom(null);
+		List<List<Integer>> result = solution.generate(4);
 		System.out.println(result);
 	}
 }
 
 class Solution {
+	
+	// 118、杨辉三角
+	public List<List<Integer>> generate(int numRows) {
+		List<List<Integer>> sum = new ArrayList<>();
+		if(numRows < 0) {
+			return null;
+		}
+		if(numRows >= 1) {
+			List<Integer> list = new ArrayList<Integer>();
+			list.add(1);
+			sum.add(list);
+		}
+		if (numRows >= 2) {
+			List<Integer> list = new ArrayList<Integer>();
+			list.add(1);
+			list.add(1);
+			sum.add(list);
+		}
+		if (numRows >= 3){
+			for(int i=2; i<numRows; i++) {
+				List<Integer> list = new ArrayList<Integer>();
+				list.add(1);
+				for(int j=1; j<i; j++) {
+					List<Integer> listIn = sum.get(i-1);
+					list.add(listIn.get(j-1)+listIn.get(j));
+				}
+				list.add(1);
+				sum.add(list);
+			}
+		}
+		return sum;
+	}
+	
 	// 107、二叉树的层次遍历
 	List<List<TreeNode>> listSum = new ArrayList<List<TreeNode>>();
 	public List<List<Integer>> levelOrderBottom(TreeNode root) {
@@ -56,7 +90,6 @@ class Solution {
 		if(root == null) {
 			return new ArrayList<>();
 		}
-		
 		List<TreeNode> list = new ArrayList<TreeNode>();
 		list.add(root);
 		listSum.add(list);
