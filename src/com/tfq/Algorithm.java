@@ -49,6 +49,9 @@ public class Algorithm {
 }
 
 class Solution {
+	//183、从不订购的客户
+	//Select c.name Customers from Customers c left join Orders o on o.CustomerId = c.Id where o.CustomerId is null 
+	
 	// 122、买卖股票的最佳时机 II
 	public int maxProfit2(int[] prices) {
 		int makeMoney = 0;
