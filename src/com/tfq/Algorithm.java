@@ -40,23 +40,34 @@ public class Algorithm {
 		// int result = solution.search(nums, 8);
 		// boolean result = solution.isPerfectSquare(5);
 		// int result = solution.arrangeCoins(2146467959);
-//		boolean result = solution.judgeSquareSum(7);
-		int[] nums = {7,1,5,3,6,4};
-		int result = solution.maxProfit(nums);
+		// boolean result = solution.judgeSquareSum(7);
+		int[] nums = { 7, 1, 5, 3, 6, 4 };
+		// int result = solution.maxProfit(nums);
+		int result = solution.maxProfit2(nums);
 		System.out.println(result);
 	}
 }
 
 class Solution {
-
-	// 121、买卖股票的最佳时机   最优算法时间复杂度O(n)，很强
-	public int maxProfit(int[] prices) {
-		int i=0;
+	// 122、买卖股票的最佳时机 II
+	public int maxProfit2(int[] prices) {
 		int makeMoney = 0;
-		while(i<prices.length) {
-			int j=i+1;
-			while(j<prices.length) {
-				if(prices[j] - prices[i] > makeMoney) {
+		for(int i=0; i<prices.length-1; i++) {
+			if(prices[i+1] > prices[i]) {
+				makeMoney += prices[i+1] - prices[i];
+			}
+		}
+		return makeMoney;
+	}
+
+	// 121、买卖股票的最佳时机 最优算法时间复杂度O(n)，很强
+	public int maxProfit(int[] prices) {
+		int i = 0;
+		int makeMoney = 0;
+		while (i < prices.length) {
+			int j = i + 1;
+			while (j < prices.length) {
+				if (prices[j] - prices[i] > makeMoney) {
 					makeMoney = prices[j] - prices[i];
 				}
 				j++;
