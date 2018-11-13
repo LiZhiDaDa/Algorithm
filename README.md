@@ -31,6 +31,8 @@
 - 118、杨辉三角  ```generate```
 - 367、 有效的完全平方数  ```isPerfectSquare```
 - 441、排列硬币  ```arrangeCoins```
+- 633、平方数之和  ```judgeSquareSum```
+- 121、买卖股票的最佳时机  ```maxProfit```
 
 
 

@@ -35,32 +35,70 @@ public class Algorithm {
 		// int result = solution.mySqrt(3);
 		// int result = solution.climbStairs(44);
 		// List<List<Integer>> result = solution.levelOrderBottom(null);
-//		List<List<Integer>> result = solution.generate(4);
-//		int[] nums = {3,4,5,6,7,9};
-//		int result = solution.search(nums, 8);
-//		boolean result = solution.isPerfectSquare(5);
-		int result = solution.arrangeCoins(2146467959);
+		// List<List<Integer>> result = solution.generate(4);
+		// int[] nums = {3,4,5,6,7,9};
+		// int result = solution.search(nums, 8);
+		// boolean result = solution.isPerfectSquare(5);
+		// int result = solution.arrangeCoins(2146467959);
+//		boolean result = solution.judgeSquareSum(7);
+		int[] nums = {7,1,5,3,6,4};
+		int result = solution.maxProfit(nums);
 		System.out.println(result);
 	}
 }
 
 class Solution {
-	
+
+	// 121、买卖股票的最佳时机   最优算法时间复杂度O(n)，很强
+	public int maxProfit(int[] prices) {
+		int i=0;
+		int makeMoney = 0;
+		while(i<prices.length) {
+			int j=i+1;
+			while(j<prices.length) {
+				if(prices[j] - prices[i] > makeMoney) {
+					makeMoney = prices[j] - prices[i];
+				}
+				j++;
+			}
+			i++;
+		}
+		return makeMoney;
+	}
+
+	// 633、平方数之和
+	public boolean judgeSquareSum(int c) {
+		int a = 0, b = (int) Math.sqrt(c);
+		while (a <= b) {
+			int sum = a * a + b * b;
+			if (sum == c) {
+				return true;
+			} else {
+				if (sum < c) {
+					a++;
+				} else {
+					b--;
+				}
+			}
+		}
+		return false;
+	}
+
 	// 441、排列硬币
 	public int arrangeCoins(int n) {
-		//二分法
-		//须知：求和 1+2+3+...+n = n(n+1)/2;
+		// 二分法
+		// 须知：求和 1+2+3+...+n = n(n+1)/2;
 		int begin = 0;
 		int end = n;
 		int mid = 0;
-		while(begin <= end) {
-			mid = (begin + end)/2;
-			long result = mid*(mid+1L)/2;
-			if(result < n) {
-				begin = mid +1;
-			}else if(result > n) {
+		while (begin <= end) {
+			mid = (begin + end) / 2;
+			long result = mid * (mid + 1L) / 2;
+			if (result < n) {
+				begin = mid + 1;
+			} else if (result > n) {
 				end = mid - 1;
-			}else if(result == n) {
+			} else if (result == n) {
 				return mid;
 			}
 		}
@@ -73,60 +111,58 @@ class Solution {
 		// i++;
 		// }
 		// return i-2;
-    }
-	
+	}
+
 	// 367、有效的完全平方数
 	public boolean isPerfectSquare(int num) {
-		if(num < 1) {
+		if (num < 1) {
 			return false;
 		}
-		if(num == 1) {
+		if (num == 1) {
 			return true;
 		}
-		
+
 		int begin = 0;
-		int end = num/2;
+		int end = num / 2;
 		float mid = 0.0f;
-		while(begin <= end) {
-			mid = (begin + end)/2;
-			if(mid < num/mid) {
-				begin = (int) (mid+1);
-			}else if(mid > num/mid) {
-				end = (int) (mid-1);
-			}else {
+		while (begin <= end) {
+			mid = (begin + end) / 2;
+			if (mid < num / mid) {
+				begin = (int) (mid + 1);
+			} else if (mid > num / mid) {
+				end = (int) (mid - 1);
+			} else {
 				return true;
 			}
 		}
 		return false;
 	}
 
-
-
 	// 704、二分查找
 	public int search(int[] nums, int target) {
 		int begin = 0;
-		int end = nums.length-1;
+		int end = nums.length - 1;
 		int mid = 0;
-		while(begin <= end) {
-			mid = (begin+end)/2;
-			if(target < nums[mid]) {
-				end = mid-1;
-			}else if(target > nums[mid]){
-				begin = mid+1;
-			}else {
+		while (begin <= end) {
+			mid = (begin + end) / 2;
+			if (target < nums[mid]) {
+				end = mid - 1;
+			} else if (target > nums[mid]) {
+				begin = mid + 1;
+			} else {
 				return mid;
 			}
 		}
 		return -1;
 	}
-	
+
 	// 118、杨辉三角
 	public List<List<Integer>> generate(int numRows) {
 		List<List<Integer>> sum = new ArrayList<>();
-		if(numRows < 0) {
+		if (numRows < 0) {
 			return null;
 		}
-		if(numRows >= 1) {
+		if (numRows >= 1) {
 			List<Integer> list = new ArrayList<Integer>();
 			list.add(1);
 			sum.add(list);
@@ -137,13 +173,13 @@ class Solution {
 			list.add(1);
 			sum.add(list);
 		}
-		if (numRows >= 3){
-			for(int i=2; i<numRows; i++) {
+		if (numRows >= 3) {
+			for (int i = 2; i < numRows; i++) {
 				List<Integer> list = new ArrayList<Integer>();
 				list.add(1);
-				for(int j=1; j<i; j++) {
-					List<Integer> listIn = sum.get(i-1);
-					list.add(listIn.get(j-1)+listIn.get(j));
+				for (int j = 1; j < i; j++) {
+					List<Integer> listIn = sum.get(i - 1);
+					list.add(listIn.get(j - 1) + listIn.get(j));
 				}
 				list.add(1);
 				sum.add(list);
@@ -151,34 +187,35 @@ class Solution {
 		}
 		return sum;
 	}
-	
+
 	// 107、二叉树的层次遍历
 	List<List<TreeNode>> listSum = new ArrayList<List<TreeNode>>();
+
 	public List<List<Integer>> levelOrderBottom(TreeNode root) {
-//		TreeNode root = new TreeNode(1);
-//		TreeNode n9 = new TreeNode(9);
-//		TreeNode n20 = new TreeNode(20);
-//		TreeNode n15 = new TreeNode(15);
-//		TreeNode n7 = new TreeNode(7);
-//		root.left = n9;
-//		root.right = n20;
-//		n20.left = n15;
-//		n20.right = n7;
-		if(root == null) {
+		// TreeNode root = new TreeNode(1);
+		// TreeNode n9 = new TreeNode(9);
+		// TreeNode n20 = new TreeNode(20);
+		// TreeNode n15 = new TreeNode(15);
+		// TreeNode n7 = new TreeNode(7);
+		// root.left = n9;
+		// root.right = n20;
+		// n20.left = n15;
+		// n20.right = n7;
+		if (root == null) {
 			return new ArrayList<>();
 		}
 		List<TreeNode> list = new ArrayList<TreeNode>();
 		list.add(root);
 		listSum.add(list);
 		List<TreeNode> bList = b(list);
-		if(bList != null) {
+		if (bList != null) {
 			listSum.add(bList);
 		}
 		List<List<Integer>> result = new ArrayList<List<Integer>>();
-		for(int i=1; i<listSum.size(); i++) {
+		for (int i = 1; i < listSum.size(); i++) {
 			List<TreeNode> model = listSum.get(i);
 			List<Integer> resultIn = new ArrayList<Integer>();
-			for(int j=0; j<model.size(); j++) {
+			for (int j = 0; j < model.size(); j++) {
 				TreeNode node = model.get(j);
 				resultIn.add(node.val);
 			}
@@ -190,23 +227,23 @@ class Solution {
 		result.add(first);
 		return result;
 	}
-	
+
 	public List<TreeNode> b(List<TreeNode> tree) {
 		List<TreeNode> list = new ArrayList<TreeNode>();
-		for(int i=0; i<tree.size(); i++) {
+		for (int i = 0; i < tree.size(); i++) {
 			TreeNode node = tree.get(i);
-			if(node.left != null) {
+			if (node.left != null) {
 				list.add(node.left);
 			}
-			if(node.right != null) {
+			if (node.right != null) {
 				list.add(node.right);
 			}
 		}
-		if(list.size() == 0) {
+		if (list.size() == 0) {
 			return null;
-		}else {
+		} else {
 			List<TreeNode> bList = b(list);
-			if(bList != null) {
+			if (bList != null) {
 				listSum.add(bList);
 			}
 		}
