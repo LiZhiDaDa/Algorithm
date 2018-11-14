@@ -41,23 +41,49 @@ public class Algorithm {
 		// boolean result = solution.isPerfectSquare(5);
 		// int result = solution.arrangeCoins(2146467959);
 		// boolean result = solution.judgeSquareSum(7);
-		int[] nums = { 7, 1, 5, 3, 6, 4 };
+		// int[] nums = { 7, 1, 5, 3, 6, 4 };
 		// int result = solution.maxProfit(nums);
-		int result = solution.maxProfit2(nums);
-		System.out.println(result);
+		// int result = solution.maxProfit2(nums);
+		int[] nums1 = {1,2,3,0,0,0};
+		int[] nums2 = {2,5,6};
+		solution.merge(nums1, 3, nums2, 3);
+		// System.out.println(result);
 	}
 }
 
 class Solution {
-	//183、从不订购的客户
-	//Select c.name Customers from Customers c left join Orders o on o.CustomerId = c.Id where o.CustomerId is null 
-	
+	// 88、合并两个有序数组
+	public void merge(int[] nums1, int m, int[] nums2, int n) {
+		int i = m - 1, j = n - 1, index = m + n - 1;
+		while (i >= 0 && j >= 0) {
+			if (nums1[i] > nums2[j]) {
+				// A大就把A的数组放在更后面
+				nums1[index--] = nums1[i--];
+
+			} else {
+				nums1[index--] = nums2[j--];
+
+			}
+		}
+		while (i >= 0) {
+			// A大就把A的数组放在更后面
+			nums1[index--] = nums1[i--];
+		}
+		while (j >= 0) {
+			nums1[index--] = nums2[j--];
+		}
+	}
+
+	// 183、从不订购的客户
+	// Select c.name Customers from Customers c left join Orders o on o.CustomerId =
+	// c.Id where o.CustomerId is null
+
 	// 122、买卖股票的最佳时机 II
 	public int maxProfit2(int[] prices) {
 		int makeMoney = 0;
-		for(int i=0; i<prices.length-1; i++) {
-			if(prices[i+1] > prices[i]) {
-				makeMoney += prices[i+1] - prices[i];
+		for (int i = 0; i < prices.length - 1; i++) {
+			if (prices[i + 1] > prices[i]) {
+				makeMoney += prices[i + 1] - prices[i];
 			}
 		}
 		return makeMoney;
