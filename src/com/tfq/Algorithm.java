@@ -44,14 +44,31 @@ public class Algorithm {
 		// int[] nums = { 7, 1, 5, 3, 6, 4 };
 		// int result = solution.maxProfit(nums);
 		// int result = solution.maxProfit2(nums);
-		int[] nums1 = {1,2,3,0,0,0};
-		int[] nums2 = {2,5,6};
+		int[] nums1 = { 1, 2, 3, 0, 0, 0 };
+		int[] nums2 = { 2, 5, 6 };
 		solution.merge(nums1, 3, nums2, 3);
 		// System.out.println(result);
 	}
 }
 
 class Solution {
+	// 112、路径总和
+	public boolean hasPathSum(TreeNode root, int sum) {
+		if(root == null) {
+			return false;
+		}
+		if(root.left == null && root.right==null && root.val == sum) {
+			return true;
+		}
+		if(hasPathSum(root.left, sum-root.val)) {
+			return true;
+		}
+		if(hasPathSum(root.right, sum-root.val)) {
+			return true;
+		}
+		return false;
+	}
+
 	// 88、合并两个有序数组
 	public void merge(int[] nums1, int m, int[] nums2, int n) {
 		int i = m - 1, j = n - 1, index = m + n - 1;
