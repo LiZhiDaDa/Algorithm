@@ -34,7 +34,8 @@
 - 633、平方数之和  ```judgeSquareSum```
 - 121、买卖股票的最佳时机  ```maxProfit```
 - 88、合并两个有序数组  ```merge```
-
+- 112、路径总和  ```hasPathSum```
+- 119、杨辉三角II  ```getRow``` 
 
 
 

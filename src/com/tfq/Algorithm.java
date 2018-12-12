@@ -44,26 +44,53 @@ public class Algorithm {
 		// int[] nums = { 7, 1, 5, 3, 6, 4 };
 		// int result = solution.maxProfit(nums);
 		// int result = solution.maxProfit2(nums);
-		int[] nums1 = { 1, 2, 3, 0, 0, 0 };
-		int[] nums2 = { 2, 5, 6 };
-		solution.merge(nums1, 3, nums2, 3);
-		// System.out.println(result);
+		// int[] nums1 = { 1, 2, 3, 0, 0, 0 };
+		// int[] nums2 = { 2, 5, 6 };
+		// solution.merge(nums1, 3, nums2, 3);
+		List<Integer> result = solution.getRow(4);
+		System.out.println(result);
 	}
 }
 
 class Solution {
+	
+	// 136、只出现一次的数字
+	public int singleNumber(int[] nums) {
+		
+		return 1;
+	}
+	
+	// 119、杨辉三角II
+	public List<Integer> getRow(int rowIndex) {
+		List<Integer> list = new ArrayList<Integer>();
+		if (rowIndex < 0) {
+			return list;
+		}
+		list.add(1);
+		if (rowIndex == 0) {
+			return list;
+		}
+		for (int i = 1; i < rowIndex + 1; i++) {
+			for (int j = list.size()-1; j > 0; j--) {
+				list.set(j, list.get(j - 1) + list.get(j));
+			}
+			list.add(1);
+		}
+		return list;
+	}
+
 	// 112、路径总和
 	public boolean hasPathSum(TreeNode root, int sum) {
-		if(root == null) {
+		if (root == null) {
 			return false;
 		}
-		if(root.left == null && root.right==null && root.val == sum) {
+		if (root.left == null && root.right == null && root.val == sum) {
 			return true;
 		}
-		if(hasPathSum(root.left, sum-root.val)) {
+		if (hasPathSum(root.left, sum - root.val)) {
 			return true;
 		}
-		if(hasPathSum(root.right, sum-root.val)) {
+		if (hasPathSum(root.right, sum - root.val)) {
 			return true;
 		}
 		return false;
